@@ -180,6 +180,9 @@ ifneq ($(wildcard ${PIVOTSET_FILE}),)
   MULTISET_PIVOT_TXT := ${MULTISET_DIR}.${MULTISET_PIVOT}
   MULTISET_ALG_TXTS  := $(patsubst %,${MULTISET_DIR}.%,${MULTISET_LANGS})
 
+  .INTERMEDIATE: ${MULTISET_ALGSRC} ${MULTISET_ALGTRG}
+
+
   create-multiset: ${MULTISET_DIR}
 	${MAKE} extract-multiset
 
@@ -196,13 +199,13 @@ ifneq ($(wildcard ${PIVOTSET_FILE}),)
 
   extract-multiset: ${MULTISET_PIVOT_TXT} ${MULTISET_ALG_TXTS}
 
-  create-all-multisets: ${EXTRACT_MULTISETS}
+  extract-all-multisets: ${EXTRACT_MULTISETS}
 
   %-extract-multiset:
 	${MAKE} MULTISET_NR=$(@:-extract-multiset=) extract-multiset
 
   ${MULTISET_ALGSRC}: %.src: %.xml
-	opus2bitext -e $@ -f $(@:.src=.trg) < $<
+	opus2bitext -d ../devtest-raw -e $@ -f $(@:.src=.trg) < $<
 
   ${MULTISET_ALGTRG}: %.trg: %.src
 	@echo "target text is extracted"
