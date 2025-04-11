@@ -141,7 +141,13 @@ ${PIVOTSET_FILE}: ${PIVOTSET_LINKS}
 
 
 ##--------------------------------------------------------------------------
-## once all those link files have been extracted, we can start
+##
+## Create all zipfiles will multi-parallel testsets:
+##
+##    make multisets
+##
+##--------------------------------------------------------------------------
+## Once all link files have been extracted, we can start
 ## creating multi-parallel datasets, one per movieID in each language set
 ##
 ##   Each line in the tsv file needs to be used to call opus2multi
@@ -170,8 +176,9 @@ ifneq ($(wildcard ${PIVOTSET_FILE}),)
   MULTISET_PIVOT    := $(shell head -${MULTISET_NR} ${PIVOTSET_FILE} | tail -1 | cut -f2)
   MULTISET_LANGS    := $(shell head -${MULTISET_NR} ${PIVOTSET_FILE} | tail -1 | cut -f3)
 
-  MULTISET_DIR      := ${MULTISET_HOMEDIR}/${MULTISET_MOVIEDIR}
   PIVOTSET_DIR      := ${PIVOTSET_HOMEDIR}/${MULTISET_MOVIEDIR}
+  MULTISET_DIR      := ${MULTISET_HOMEDIR}/${MULTISET_MOVIEDIR}
+  MULTISET_ZIP      := ${MULTISET_HOMEDIR}/${MULTISET_MOVIEDIR}.zip
 
   MULTISET_ALGFILES := $(wildcard ${MULTISET_DIR}/*.xml)
   MULTISET_ALGSRC   := $(patsubst %.xml,%.src,${MULTISET_ALGFILES})
@@ -179,10 +186,31 @@ ifneq ($(wildcard ${PIVOTSET_FILE}),)
 
   MULTISET_PIVOT_TXT := ${MULTISET_DIR}.${MULTISET_PIVOT}
   MULTISET_ALG_TXTS  := $(patsubst %,${MULTISET_DIR}.%,${MULTISET_LANGS})
+  MULTISET_ZIPS      := $(patsubst %,${MULTISET_HOMEDIR}/%.zip,$(shell cut -f1,2 -d/ ${PIVOTSET_FILE} | sort -u))
+
 
   .INTERMEDIATE: ${MULTISET_ALGSRC} ${MULTISET_ALGTRG}
 
+  # top-level target: create all packages with multi-parallel testsets
+  # NOTE: simple password protection to avoid crawling of test sets
 
+  .PHONY: multisets
+  multisets:
+	${MAKE} create-all-multisets
+	${MAKE} create-all-multiset-zips
+
+  .PHONY: create-all-multiset-zips
+  create-all-multiset-zips: ${MULTISET_ZIPS}
+
+  ${MULTISET_ZIPS}:
+	if [ -d ${@:.zip=} ]; then \
+	  zip --password OpenSubtitles2024-multiset -r $@ ${@:.zip=}; \
+	  find ${@:.zip=} -delete; \
+	fi
+
+
+
+  .PHONY: create-multiset create-all-multiset
   create-multiset: ${MULTISET_DIR}
 	${MAKE} extract-multiset
 
@@ -196,8 +224,16 @@ ifneq ($(wildcard ${PIVOTSET_FILE}),)
 	mkdir -p ${MULTISET_DIR}
 	cd ${MULTISET_DIR} && opus2multi $(CURDIR)/${PIVOTSET_DIR} ${MULTISET_PIVOT} ${MULTISET_LANGS}
 
+  ${MULTISET_ZIP}: ${MULTISET_PIVOT_TXT} ${MULTISET_ALG_TXTS}
+	find ${MULTISET_DIR} -name '*.src' -delete
+	find ${MULTISET_DIR} -name '*.trg' -delete
+	zip --password OpenSubtitles2024-multiset -r $@ ${MULTISET_DIR}
 
+
+  .PHONY: extract-multiset extract-all-multiset
   extract-multiset: ${MULTISET_PIVOT_TXT} ${MULTISET_ALG_TXTS}
+	find ${MULTISET_DIR} -name '*.src' -delete
+	find ${MULTISET_DIR} -name '*.trg' -delete
 
   extract-all-multisets: ${EXTRACT_MULTISETS}
 
