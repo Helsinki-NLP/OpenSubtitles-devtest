@@ -91,7 +91,7 @@ PIVOTSET_LINKS   := pivot-linksets-${LINK_THRESHOLD}.txt
 PIVOTSET_FILE    := ${PIVOTSET_HOMEDIR}/pivot-data.tsv
 
 pivot-linksets: ${LINKED_DOCS} $(PIVOTSET_LINKS) ${PIVOTSET_FILE}
-	${MAKE} create-all-multisets
+	${MAKE} multisets
 
 pivot-linksets-0.8:
 	${MAKE} LINK_THRESHOLD=0.8 pivot-linksets
@@ -186,6 +186,8 @@ ifneq ($(wildcard ${PIVOTSET_FILE}),)
 
   MULTISET_PIVOT_TXT := ${MULTISET_DIR}.${MULTISET_PIVOT}
   MULTISET_ALG_TXTS  := $(patsubst %,${MULTISET_DIR}.%,${MULTISET_LANGS})
+
+  PIVOTSET_ZIPS      := $(patsubst %,${PIVOTSET_HOMEDIR}/%.zip,$(shell cut -f1,2 -d/ ${PIVOTSET_FILE} | sort -u))
   MULTISET_ZIPS      := $(patsubst %,${MULTISET_HOMEDIR}/%.zip,$(shell cut -f1,2 -d/ ${PIVOTSET_FILE} | sort -u))
 
 
@@ -198,11 +200,15 @@ ifneq ($(wildcard ${PIVOTSET_FILE}),)
   multisets:
 	${MAKE} create-all-multisets
 	${MAKE} create-all-multiset-zips
+	${MAKE} create-all-pivotset-zips
 
   .PHONY: create-all-multiset-zips
   create-all-multiset-zips: ${MULTISET_ZIPS}
 
-  ${MULTISET_ZIPS}:
+  .PHONY: create-all-pivotset-zips
+  create-all-pivotset-zips: ${PIVOTSET_ZIPS}
+
+  ${MULTISET_ZIPS} ${PIVOTSET_ZIPS}:
 	if [ -d ${@:.zip=} ]; then \
 	  zip --password OpenSubtitles2024-multiset -r $@ ${@:.zip=}; \
 	  find ${@:.zip=} -delete; \
@@ -217,7 +223,7 @@ ifneq ($(wildcard ${PIVOTSET_FILE}),)
   create-all-multisets: ${CREATE_MULTISETS}
 
   %-create-multiset:
-	${MAKE} MULTISET_NR=$(@:-create-multiset=) create-multiset
+	-${MAKE} MULTISET_NR=$(@:-create-multiset=) create-multiset
 
 
   ${MULTISET_DIR}: ${PIVOTSET_DIR}
