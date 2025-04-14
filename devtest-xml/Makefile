@@ -64,6 +64,15 @@ all-jobs:
 	touch all.done
 
 
+encrypt-zip:
+	for z in $(wildcard ??.zip) $(wildcard ??_??.zip); do \
+	  echo "encrypt $$z"; \
+	  unzip -q $$z; \
+	  zip --password OpenSubtitles2024-devtest -rq $$z ${CORPUS}/xml/*; \
+	  find ${CORPUS}/xml -delete; \
+	done
+
+
 check-broken:
 	@for p in ${LANGPAIRS}; do \
 	  if [ ! -e $$p.xml.gz ]; then \
@@ -307,7 +316,7 @@ extract-devtest: ${LANG_ZIPFILES}
 	mkdir -p ${CORPUS}/xml/$(@:.zip=)
 	echo "reserved devtest subtitles (release year ${DEVTEST_YEAR})" > ${CORPUS}/xml/$(@:.zip=)/README
 	unzip -n -q ../xml/$@ '*/$(@:.zip=)/${DEVTEST_YEAR}/*'
-	zip -rq $@ ${CORPUS}/xml/$(@:.zip=)
+	zip --password OpenSubtitles2024-devtest -rq $@ ${CORPUS}/xml/$(@:.zip=)
 	find ${CORPUS}/xml/$(@:.zip=) -delete
 	zip ../xml/$@ -d '*/$(@:.zip=)/${DEVTEST_YEAR}/*'
 

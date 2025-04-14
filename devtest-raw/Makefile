@@ -18,6 +18,14 @@ all all-jobs:
 	touch all.done
 
 
+encrypt-zip:
+	for z in $(wildcard ??.zip) $(wildcard ??_??.zip); do \
+	  echo "encrypt $$z"; \
+	  unzip -P OpenSubtitles2024-devtest -q $$z; \
+	  zip --password OpenSubtitles2024-devtest -rq $$z ${CORPUS}/raw/*; \
+	  find ${CORPUS}/raw -delete; \
+	done
+
 ## create password-protected zipfile of MT testsets
 
 .PHONY: testset
@@ -59,7 +67,7 @@ extract-devtest: ${LANG_ZIPFILES}
 	mkdir -p ${CORPUS}/raw/$(@:.zip=)
 	echo "reserved devtest subtitles (release year ${DEVTEST_YEAR})" > ${CORPUS}/raw/$(@:.zip=)/README
 	unzip ../raw/$@ '*/$(@:.zip=)/${DEVTEST_YEAR}/*'
-	zip -rq $@ ${CORPUS}/raw/$(@:.zip=)
+	zip --password OpenSubtitles2024-devtest -rq $@ ${CORPUS}/raw/$(@:.zip=)
 	find ${CORPUS}/raw/$(@:.zip=) -delete
 	zip ../raw/$@ -d '*/$(@:.zip=)/${DEVTEST_YEAR}/*'
 
