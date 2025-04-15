@@ -20,6 +20,10 @@ LANGPAIRS := ${shell \
 
 BITEXT_ALGFILES := $(patsubst %,%.xml.gz,${LANGPAIRS})
 
+## password-protected zipfiles
+ENCRYPTED_ZIPFILES := $(patsubst %,encrypted/%,$(wildcard *.zip))
+
+
 .PRECIOUS: ${BITEXT_ALGFILES}
 
 SRC ?= fi
@@ -48,6 +52,7 @@ all:
 	${MAKE} align-all
 	${MAKE} testsets
 	${MAKE} devsets
+	${MAKE} protected-zipfiles
 	${MAKE} cleanup
 	touch all.done
 
@@ -64,13 +69,35 @@ all-jobs:
 	touch all.done
 
 
-encrypt-zip:
-	for z in $(wildcard ??.zip) $(wildcard ??_??.zip); do \
-	  echo "encrypt $$z"; \
-	  unzip -q $$z; \
-	  zip --password OpenSubtitles2024-devtest -rq $$z ${CORPUS}/xml/*; \
-	  find ${CORPUS}/xml -delete; \
-	done
+protected-zipfiles: ${ENCRYPTED_ZIPFILES}
+
+${ENCRYPTED_ZIPFILES}:
+	mkdir -p $(dir $@)
+	mkdir -p $(TMPDIR)/$@.d
+	cd $(TMPDIR)/$@.d && unzip -q $(CURDIR)/$(notdir $@)
+	cd $(TMPDIR)/$@.d && zip --password OpenSubtitles2024-devtest -Drq $(CURDIR)/$@ *
+	find $(TMPDIR)/$@.d -delete
+
+
+# encrypt-zip:
+# 	for z in $(wildcard ??.zip) $(wildcard ??_??.zip); do \
+# 	  echo "encrypt $$z"; \
+# 	  unzip -q $$z; \
+# 	  zip --password OpenSubtitles2024-devtest -rq $$z ${CORPUS}/xml/*; \
+# 	  find ${CORPUS}/xml -delete; \
+# 	done
+
+# test-encrypt:
+# 	for z in $(wildcard ??.zip) $(wildcard ??_??.zip); do \
+# 	  if `unzip -o -P x -q $$z '*/README'`; then \
+# 	     echo "$$z ok"; \
+# 	  else \
+# 	     echo "$$z encrypted"; \
+# 	     mv $$z $$z-encrypted.zip; \
+# 	     wget -qq https://object.pouta.csc.fi/OPUS-OpenSubtitles-devtest/devtest-xml/$$z; \
+# 	  fi \
+# 	done
+
 
 
 check-broken:

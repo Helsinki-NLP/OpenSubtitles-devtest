@@ -9,51 +9,47 @@ include ../Makefile.submit
 ## assumes that we are inside OPUS-ingest/corpus/OpenSubtitles
 LANG_ZIPFILES  := $(notdir $(wildcard ../raw/*.zip))
 
+## password-protected zipfiles
+ENCRYPTED_ZIPFILES := $(patsubst %,encrypted/%,$(wildcard *.zip))
+
 
 .PHONY: all all-jobs
 all all-jobs:
 	-${MAKE} extract-devtest
 	${MAKE} testset
 	${MAKE} devset
+	${MAKE} protected-zipfiles
 	touch all.done
 
 
-encrypt-zip:
-	for z in $(wildcard ??.zip) $(wildcard ??_??.zip); do \
-	  echo "encrypt $$z"; \
-	  unzip -P OpenSubtitles2024-devtest -q $$z; \
-	  zip --password OpenSubtitles2024-devtest -rq $$z ${CORPUS}/raw/*; \
-	  find ${CORPUS}/raw -delete; \
-	done
+protected-zipfiles: ${ENCRYPTED_ZIPFILES}
 
-## create password-protected zipfile of MT testsets
-
-.PHONY: testset
-testset: OpenSubtitles2024-testset.zip
-
-OpenSubtitles2024-testset.zip: OpenSubtitles2024/test
-	zip -r --password OpenSubtitles2024-testset $@ $<
-	find $< -delete
-
-OpenSubtitles2024/test:
-	${MAKE} testsets
+${ENCRYPTED_ZIPFILES}:
 	mkdir -p $(dir $@)
-	mv test $@
+	mkdir -p $(TMPDIR)/$@.d
+	cd $(TMPDIR)/$@.d && unzip -q $(CURDIR)/$(notdir $@)
+	cd $(TMPDIR)/$@.d && zip --password OpenSubtitles2024-devtest -Drq $(CURDIR)/$@ *
+	find $(TMPDIR)/$@.d -delete
 
 
-## create password-protected zipfile of MT devsets
+# encrypt-zip:
+# 	for z in $(wildcard ??.zip) $(wildcard ??_??.zip); do \
+# 	  echo "encrypt $$z"; \
+# 	  unzip -P OpenSubtitles2024-devtest -q $$z; \
+# 	  zip --password OpenSubtitles2024-devtest -rq $$z ${CORPUS}/raw/*; \
+# 	  find ${CORPUS}/raw -delete; \
+# 	done
 
-.PHONY: devset
-devset: OpenSubtitles2024-devset.zip
-
-OpenSubtitles2024-devset.zip: OpenSubtitles2024/dev
-	zip -r --password OpenSubtitles2024-devset $@ $<
-	find $< -delete
-
-OpenSubtitles2024/dev:
-	${MAKE} devsets
-	mkdir -p $(dir $@)
-	mv dev $@
+# test-encrypt:
+# 	for z in $(wildcard ??.zip) $(wildcard ??_??.zip); do \
+# 	  if `unzip -o -P x -q $$z '*/README'`; then \
+# 	     echo "$$z ok"; \
+# 	  else \
+# 	     echo "$$z encrypted"; \
+# 	     mv $$z $$z-encrypted.zip; \
+# 	     wget -qq https://object.pouta.csc.fi/OPUS-OpenSubtitles-devtest/devtest-raw/$$z; \
+# 	  fi \
+# 	done
 
 
 
