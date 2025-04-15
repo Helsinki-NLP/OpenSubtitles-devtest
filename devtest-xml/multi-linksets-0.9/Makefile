@@ -21,6 +21,7 @@ README.md:
 	  echo -n '| ' >> $@; \
 	  echo -n $$m | tr '-' " " >> $@; \
 	  echo -n '| ' >> $@; \
-	  unzip -Z1 2024/$$m.zip | cut -f4 -d/ | cut -f1 -d. | tr "\n" ' ' >> $@; \
+	  unzip -Z1 2024/$$m.zip | cut -f4 -d/ | cut -f1 -d. | sort -u | tr "\n" ' ' >> $@; \
+	  echo -n '| ' >> $@; \
 	  echo "[$$m.zip](2024/$$m.zip)" >> $@; \
 	done
