@@ -39,9 +39,9 @@ Multilingual testsets corersponds to sets of multi-parallel test data in which a
 
 The datasets have been extracted with different alignment thresholds: 0.8, 0.9, and no alignment threshold (= all). Each dataset is distributed in a separate zipfile:
 
-* [linksets with alignment threshold 0.9](devtest-xml/multi-linksets-0.9/2024/)
-* [linksets with alignment threshold 0.8](devtest-xml/multi-linksets-0.8/2024/)
-* [linksets with no alignment threshold](devtest-xml/multi-linksets-all/2024/)
+* [linksets with alignment threshold 0.9](devtest-xml/multi-linksets-0.9/)
+* [linksets with alignment threshold 0.8](devtest-xml/multi-linksets-0.8/)
+* [linksets with no alignment threshold](devtest-xml/multi-linksets-all/)
 
 
 Each zip-file contains sentence alignment files in standoff XCES Align annotation (`langset/movieID/xx-yy.xml` with `langset` replaced by the set of languages in the set, `movieID` referring to the movie/series that is covered by the substitles, and `xx` and `yy` referring to source and target language codes) and aligned plain text files for each movie/series in the testset.

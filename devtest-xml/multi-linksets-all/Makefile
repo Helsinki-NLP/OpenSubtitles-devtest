@@ -1,12 +1,12 @@
 
 
-BASEURL := https://raw.githubusercontent.com/Helsinki-NLP/OpenSubtitles-devtest/refs/heads/master/devtest-xml/multi-linksets-0.9
+BASEURL := https://raw.githubusercontent.com/Helsinki-NLP/OpenSubtitles-devtest/refs/heads/master/devtest-xml/multi-linksets-all
 
 MULTISETS := $(sort $(patsubst %.zip,%,$(notdir $(wildcard 2024/*.zip))))
 
 
 README.md:
-	echo "# Multilingual OpenSubtitles Test Sets (alignment threshold = 0.9)"    > $@
+	echo "# Multilingual OpenSubtitles Test Sets (no alignment threshold)"    > $@
 	echo ""                                         >> $@
 	echo "| Nr of Languages | Nr of Subtitles | Languages | Subtitles | Download Link |" >> $@
 	echo "|-----------------|-----------------|-----------|-----------|---------------|" >> $@
