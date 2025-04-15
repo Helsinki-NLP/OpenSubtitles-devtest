@@ -14,7 +14,7 @@ Alignment scores are computed for each pair of subtitles from a movie/series-epi
 
 Bilingual testsets are not multiparallel (i.e. do not cover the same movies for each language pair) and have been extracted to include at least one movie/series-episode and at most 5 movies/series-episodes per language pair. Alignment scores need to be above 0.8 and the movies are selected to have the best alignment score.
 
-* [Testsets in aligned plain text format](https://object.pouta.csc.fi/OPUS-OpenSubtitles-devtest/devtest-raw/OpenSubtitles2024-testset.zip): Zipfile of all aligned plain text files with sentences on corresponding lines (Moses format).
+* [Testsets in aligned plain text format](https://object.pouta.csc.fi/OPUS-OpenSubtitles-devtest/OpenSubtitles2024-testset.zip): Zipfile of all aligned plain text files with sentences on corresponding lines (Moses format).
 * [Testset Sentence Alignment in XML](devtest-xml/test): Sentence alignments as standoff annotation in XCES Align format (`xx-yy.xml.gz` files with `xx` and `yy` being source and target language ID's; `xx-yy.xml.gz.scores` list alignment scores for the selected subtitle pairs)
 * [Subtitle XML files (untokenized)](devtest-raw): Subtitle files in XML format (`xx.zip` with `xx` being a language ID); Files can be downloaded from `https://object.pouta.csc.fi/OPUS-OpenSubtitle-devtest/devtest-raw/xx.zip` (replacing `xx` with the language ID of interest)
 * [Subtitle XML files (tokenized)](devtest-xml): Tokenized subtitle files in XML format (`xx.zip` with `xx` being a language ID) Files can be downloaded from `https://object.pouta.csc.fi/OPUS-OpenSubtitle-devtest/devtest-xml/xx.zip` (replacing `xx` with the language ID of interest)
@@ -23,7 +23,7 @@ Bilingual testsets are not multiparallel (i.e. do not cover the same movies for 
 Non-selected subtitle files are available as aligned development data:
 
 
-* [Devsets in aligned plain text format](https://object.pouta.csc.fi/OPUS-OpenSubtitles-devtest/devtest-raw/OpenSubtitles2024-devset.zip): Zipfile of all aligned plain text files with sentences on corresponding lines (Moses format).
+* [Devsets in aligned plain text format](https://object.pouta.csc.fi/OPUS-OpenSubtitles-devtest/OpenSubtitles2024-devset.zip): Zipfile of all aligned plain text files with sentences on corresponding lines (Moses format).
 * [Testset Sentence Alignment in XML](devtest-xml/dev): Sentence alignments as standoff annotation in XCES Align format (`xx-yy.xml.gz` files with `xx` and `yy` being source and target language ID's; `xx-yy.xml.gz.scores` list alignment scores for the selected subtitle pairs)
 
 The subtitles in XML format are all includes in the language-specific zip-files (see testsets above)
