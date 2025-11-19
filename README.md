@@ -24,28 +24,30 @@ Non-selected subtitle files are available as aligned development data:
 
 
 * [Devsets in aligned plain text format](https://object.pouta.csc.fi/OPUS-OpenSubtitles-devtest/OpenSubtitles2024-devset.zip): Zipfile of all aligned plain text files with sentences on corresponding lines (Moses format).
-* [Testset Sentence Alignment in XML](devtest-xml/dev): Sentence alignments as standoff annotation in XCES Align format (`xx-yy.xml.gz` files with `xx` and `yy` being source and target language ID's; `xx-yy.xml.gz.scores` list alignment scores for the selected subtitle pairs)
+* [Devset Sentence Alignment in XML](devtest-xml/dev): Sentence alignments as standoff annotation in XCES Align format (`xx-yy.xml.gz` files with `xx` and `yy` being source and target language ID's; `xx-yy.xml.gz.scores` list alignment scores for the selected subtitle pairs)
 
 The subtitles in XML format are all includes in the language-specific zip-files (see testsets above)
 
 
-**Note:** The zipfiles of the aligned plain text files are password protexted to avoid crawlers to include the testsets (at least in this aligned form) in potential training data. The password is the same as the file name without the file extension `.zip`.
+**Note:** The zipfiles of the aligned plain text files are password protected to avoid crawlers to include the testsets (at least in this aligned form) in potential training data. The password is the same as the file name without the file extension `.zip`.
 
 
 ## Multilingual testsets
 
-Multilingual testsets corersponds to sets of multi-parallel test data in which all subtitles are covered for all selected movies/series-episodes for all languages included in the testset. There are various datasets with different language coverage in this collections.
+Multilingual testsets corersponds to sets of multi-way parallel test data in which all subtitles are covered for all selected movies/series-episodes for all languages included in the testset. The alignments are entirely synchronized across all languages involved. We extracted a dataset that covers 40 languages and language variants and a selection of 16 subtitle files:
 
+* [opensubtitles2024-multitest](https://raw.githubusercontent.com/Helsinki-NLP/OpenSubtitles-devtest/refs/heads/master/devtest-xml/multi-linksets-0.9/2024/ar-bg-cs-da-de-el-en-es-et-fa-fi-fr-he-hi-hr-hu-id-it-ko-lt-lv-ms-nl-no-pl-pt-pt_BR-ro-ru-sk-sl-sr-sv-ta-te-tr-uk-vi-zh_CN-zh_TW.zip)
 
-The datasets have been extracted with different alignment thresholds: 0.8, 0.9, and no alignment threshold (= all). Each dataset is distributed in a separate zipfile:
+The zip-file contains sentence alignment files in standoff XCES Align annotation (`langset/movieID/xx-yy.xml` with `langset` replaced by the set of languages in the set, `movieID` referring to the movie/series that is covered by the substitles, and `xx` and `yy` referring to source and target language codes) and aligned plain text files for each movie/series in the testset. The languages included in the data set are: ar bg cs da de el en es et fa fi fr he hi hr hu id it ko lt lv ms nl no pl pt pt_BR ro ru sk sl sr sv ta te tr uk vi zh_CN zh_TW
+
+The plain text files are aligned across all languages in the text with corresponding text on identical lines in each subtitle file.
+
+**Note:** The zipfiles are password protected to avoid crawlers to include the testsets (at least in this aligned form) in potential training data. The password is `OpenSubtitles2024-multiset`.
+
+Besides of this selected test set, we also provide alternative sets that have been extracted from OpenSubtitles2024. Those test sets have different kinds of language and subtitle coverage and are also based on different alignment thresholds. All download links are available from the following sub pages:
 
 * [linksets with alignment threshold 0.9](devtest-xml/multi-linksets-0.9/)
 * [linksets with alignment threshold 0.8](devtest-xml/multi-linksets-0.8/)
 * [linksets with no alignment threshold](devtest-xml/multi-linksets-all/)
 
-
-Each zip-file contains sentence alignment files in standoff XCES Align annotation (`langset/movieID/xx-yy.xml` with `langset` replaced by the set of languages in the set, `movieID` referring to the movie/series that is covered by the substitles, and `xx` and `yy` referring to source and target language codes) and aligned plain text files for each movie/series in the testset.
-
-The plain text files are aligned across all languages in the text with corresponding text on identical lines in each subtitle file.
-
-**Note:** The zipfiles are password protexted to avoid crawlers to include the testsets (at least in this aligned form) in potential training data. The password is `OpenSubtitles2024-multiset`.
+The datasets have been extracted with alignment thresholds 0.8, 0.9 and no alignment threshold (= all). Each dataset is distributed in a separate zipfile.
