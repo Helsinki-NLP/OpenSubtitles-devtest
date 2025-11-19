@@ -3,6 +3,16 @@
 
 A repository of aligned subtitles from OpenSubtitles to be used as development and test data in machine translation. Subtitles from 2024 have been reserved to be heldout data for development and test data.
 
+The essential resources are the following:
+
+* Bilingual test sets: [OpenSubtitles2024-testset.zip](https://object.pouta.csc.fi/OPUS-OpenSubtitles-devtest/OpenSubtitles2024-testset.zip)
+* Bilingual development sets: [OpenSubtitles2024-testset.zip](https://object.pouta.csc.fi/OPUS-OpenSubtitles-devtest/OpenSubtitles2024-devset.zip)
+* Multilingual test set: [ar-bg-cs-da-de-el-en-es-et-fa-fi-fr-he-hi-hr-hu-id-it-ko-lt-lv-ms-nl-no-pl-pt-pt_BR-ro-ru-sk-sl-sr-sv-ta-te-tr-uk-vi-zh_CN-zh_TW.zip](https://raw.githubusercontent.com/Helsinki-NLP/OpenSubtitles-devtest/refs/heads/master/devtest-xml/multi-linksets-0.9/2024/ar-bg-cs-da-de-el-en-es-et-fa-fi-fr-he-hi-hr-hu-id-it-ko-lt-lv-ms-nl-no-pl-pt-pt_BR-ro-ru-sk-sl-sr-sv-ta-te-tr-uk-vi-zh_CN-zh_TW.zip)
+
+
+**Note:** The zipfiles of the aligned plain text files are password protected to avoid crawlers to include the testsets (at least in this aligned form) in potential training data. The password is the same as the file name without the file extension `.zip`. For the multilingual test set the password is `OpenSubtitles2024-multiset`.
+
+Some more details about the data sets and how they have been created are given below.
 
 
 ## Alignment scores
