@@ -61,3 +61,8 @@ Besides of this selected test set, we also provide alternative sets that have be
 * [linksets with no alignment threshold](devtest-xml/multi-linksets-all/)
 
 The datasets have been extracted with alignment thresholds 0.8, 0.9 and no alignment threshold (= all). Each dataset is distributed in a separate zipfile.
+
+
+## Acknowledgements
+
+This project has received funding from the European Union’s Horizon Europe research and innovation programme under grant agreement No 101070350.
