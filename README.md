@@ -5,10 +5,26 @@ A repository of aligned subtitles from OpenSubtitles to be used as development a
 
 The essential resources are the following:
 
-* Bilingual test sets: [OpenSubtitles2024-testset.zip](https://object.pouta.csc.fi/OPUS-OpenSubtitles-devtest/OpenSubtitles2024-testset.zip)
-* Bilingual development sets: [OpenSubtitles2024-devset.zip](https://object.pouta.csc.fi/OPUS-OpenSubtitles-devtest/OpenSubtitles2024-devset.zip)
-* Multilingual test set: [ar-bg-cs-da-de-el-en-es-et-fa-fi-fr-he-hi-hr-hu-id-it-ko-lt-lv-ms-nl-no-pl-pt-pt_BR-ro-ru-sk-sl-sr-sv-ta-te-tr-uk-vi-zh_CN-zh_TW.zip](https://raw.githubusercontent.com/Helsinki-NLP/OpenSubtitles-devtest/refs/heads/master/devtest-xml/multi-linksets-0.9/2024/ar-bg-cs-da-de-el-en-es-et-fa-fi-fr-he-hi-hr-hu-id-it-ko-lt-lv-ms-nl-no-pl-pt-pt_BR-ro-ru-sk-sl-sr-sv-ta-te-tr-uk-vi-zh_CN-zh_TW.zip)
+* **Training data:** [OpenSubtitles v2024](https://opus.nlpl.eu/datasets/OpenSubtitles)
+* **Bilingual test sets:** [OpenSubtitles2024-testset.zip](https://object.pouta.csc.fi/OPUS-OpenSubtitles-devtest/OpenSubtitles2024-testset.zip)
+* **Bilingual development sets:** [OpenSubtitles2024-devset.zip](https://object.pouta.csc.fi/OPUS-OpenSubtitles-devtest/OpenSubtitles2024-devset.zip)
+* **Multilingual test set:** [OpenSubtitles2024-multiset.zip](https://raw.githubusercontent.com/Helsinki-NLP/OpenSubtitles-devtest/refs/heads/master/devtest-xml/multi-linksets-0.9/2024/ar-bg-cs-da-de-el-en-es-et-fa-fi-fr-he-hi-hr-hu-id-it-ko-lt-lv-ms-nl-no-pl-pt-pt_BR-ro-ru-sk-sl-sr-sv-ta-te-tr-uk-vi-zh_CN-zh_TW.zip)
+* **Hugging Face:** [Bilingual dev/test sets](https://huggingface.co/datasets/Helsinki-NLP/OpenSubtitles2024), [multilingual test set](https://huggingface.co/datasets/Helsinki-NLP/OpenSubtitles2024-40-langs-15-movies)
+* **Paper:** Tiedemann, J., & Luo, H. (2026). [OpenSubtitles2024: A Massively Parallel Dataset of Movie Subtitles for MT Development and Evaluation](https://doi.org/10.63317/4ivg578ub2ob). In Proceedings of the Fifteenth Language Resources and Evaluation Conference (LREC 2026) (pp. 8897–8907). European Language Resources Association (ELRA).
 
+```bibtex
+@inproceedings{tiedemann-etal-2026-opensubtitles2024,
+  title = {OpenSubtitles2024: A Massively Parallel Dataset of Movie Subtitles for MT Development and Evaluation},
+  author = {Tiedemann, Joerg and Luo, Hengyu},
+  booktitle = {Proceedings of the Fifteenth Language Resources and Evaluation Conference (LREC 2026)},
+  month = {May},
+  year = {2026},
+  pages = {8897--8907},
+  address = {Palma, Mallorca, Spain},
+  publisher = {European Language Resources Association (ELRA)},
+  doi = {10.63317/4ivg578ub2ob},
+}
+```
 
 **Note:** The zipfiles of the aligned plain text files are password protected to avoid crawlers to include the testsets (at least in this aligned form) in potential training data. The password is the same as the file name without the file extension `.zip`. For the multilingual test set the password is `OpenSubtitles2024-multiset`.
 
@@ -65,4 +81,4 @@ The datasets have been extracted with alignment thresholds 0.8, 0.9 and no align
 
 ## Acknowledgements
 
-This project has received funding from the European Union’s Horizon Europe research and innovation programme under grant agreement No 101070350.
+First of all we would like to thank [opensubtitles.org](https://www.opensubtitles.org) for providing the resources and the friendly collaboration. This work was supported by the European Union's Horizon Europe research and innovation programme under grant agreement No 101070350 (the [HPLT project](https://hplt-project.org)), by the [OpenEuroLLM project](https://openeurollm.eu), co-funded by the Digital Europe Programme under GA no. 101195233, and by the AI-DOC program hosted at the Finnish Center of Artificial Intelligence (decision number VN/3137/2024-OKM-6). We would also like to thank [CSC IT Center for Science](https://csc.fi/en/) (Finland), and the [LUMI supercomputer](https://lumi-supercomputer.eu) (owned by the EuroHPC Joint Undertaking) for providing computational resources.
