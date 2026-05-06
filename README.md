@@ -5,7 +5,7 @@ A repository of aligned subtitles from OpenSubtitles to be used as development a
 
 The essential resources are the following:
 
-* **Training data:** [OpenSubtitles v2024](https://opus.nlpl.eu/datasets/OpenSubtitles)
+* **Training data:** [OpenSubtitles v2024](https://opus.nlpl.eu/datasets/OpenSubtitles) (access through the [OPUS API](https://opus.nlpl.eu/opusapi) and [OpusTools](https://pypi.org/project/opustools/))
 * **Bilingual test sets:** [OpenSubtitles2024-testset.zip](https://object.pouta.csc.fi/OPUS-OpenSubtitles-devtest/OpenSubtitles2024-testset.zip)
 * **Bilingual development sets:** [OpenSubtitles2024-devset.zip](https://object.pouta.csc.fi/OPUS-OpenSubtitles-devtest/OpenSubtitles2024-devset.zip)
 * **Multilingual test set:** [OpenSubtitles2024-multiset.zip](https://raw.githubusercontent.com/Helsinki-NLP/OpenSubtitles-devtest/refs/heads/master/devtest-xml/multi-linksets-0.9/2024/ar-bg-cs-da-de-el-en-es-et-fa-fi-fr-he-hi-hr-hu-id-it-ko-lt-lv-ms-nl-no-pl-pt-pt_BR-ro-ru-sk-sl-sr-sv-ta-te-tr-uk-vi-zh_CN-zh_TW.zip)
