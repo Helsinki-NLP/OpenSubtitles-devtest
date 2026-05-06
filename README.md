@@ -10,6 +10,7 @@ The essential resources are the following:
 * **Bilingual development sets:** [OpenSubtitles2024-devset.zip](https://object.pouta.csc.fi/OPUS-OpenSubtitles-devtest/OpenSubtitles2024-devset.zip)
 * **Multilingual test set:** [OpenSubtitles2024-multiset.zip](https://raw.githubusercontent.com/Helsinki-NLP/OpenSubtitles-devtest/refs/heads/master/devtest-xml/multi-linksets-0.9/2024/ar-bg-cs-da-de-el-en-es-et-fa-fi-fr-he-hi-hr-hu-id-it-ko-lt-lv-ms-nl-no-pl-pt-pt_BR-ro-ru-sk-sl-sr-sv-ta-te-tr-uk-vi-zh_CN-zh_TW.zip)
 * **Hugging Face:** [Bilingual dev/test sets](https://huggingface.co/datasets/Helsinki-NLP/OpenSubtitles2024), [multilingual test set](https://huggingface.co/datasets/Helsinki-NLP/OpenSubtitles2024-40-langs-15-movies)
+* **Browsing Interface**: [OPUS Testset Explorer Website](https://opus.nlpl.eu/bench/explore)
 * **Paper:** Tiedemann, J., & Luo, H. (2026). [OpenSubtitles2024: A Massively Parallel Dataset of Movie Subtitles for MT Development and Evaluation](https://doi.org/10.63317/4ivg578ub2ob). In Proceedings of the Fifteenth Language Resources and Evaluation Conference (LREC 2026) (pp. 8897–8907). European Language Resources Association (ELRA).
 
 ```bibtex
